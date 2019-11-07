@@ -27,6 +27,7 @@ v_branch=$(cat_or $ENV_DIR/V_BRANCH "master")
 
 echo "Installing V..." | arrow
 
+rm -Rf $V_DIR
 git clone --depth 1 --branch $v_branch $v_repo $V_DIR
 cd $V_DIR
 make
