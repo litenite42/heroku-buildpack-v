@@ -2,7 +2,6 @@
 # usage: bin/compile <build-dir> <cache-dir> <env-dir>
 
 set -eo pipefail
-set -x
 
 function arrow() {
   sed -u 's/^/----->  /'
@@ -36,8 +35,9 @@ make
 
 PKGLIST=$BUILD_DIR/vpm.txt
 if [ -f "$PKGLIST" ]; then
-    echo "Found $PKGLIST, installing VPM packages" | arrow
+    echo "Found vpm.txt, installing VPM packages" | arrow
     while read p; do
+      echo "Installing $p" | indent | arrow
       $V_DIR/v install $p
     done <$PKGLIST
 else 
