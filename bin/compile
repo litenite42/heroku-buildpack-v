@@ -39,7 +39,7 @@ if [ -f "$PKGLIST" ]; then
     while read p; do
       echo "Installing $p" | indent | arrow
       $V_DIR/v install $p
-    done <$PKGLIST
+    done < $(cat PKGLIST)
 else 
     echo "vpm.txt not found - do not install any VPM packages" | arrow
 fi
