@@ -25,14 +25,28 @@ V_DIR=$CACHE_DIR/v
 v_repo=$(cat_or $ENV_DIR/V_REPO "https://github.com/vlang/v.git")
 v_branch=$(cat_or $ENV_DIR/V_BRANCH "master")
 
-echo "Installing V..." | arrow
+echo "Cloning V..." | arrow
 
 rm -Rf $V_DIR
 git clone --depth 1 --branch $v_branch $v_repo $V_DIR
 cd $V_DIR
+echo "Building V..." | arrow
 make
+
+$PKGLIST=$BUILD_DIR/vpm.txt
+if [ -f "$PKGLIST" ]; then
+    echo "Found $PKGLIST, installing VPM packages" | arrow
+    for p in ($PKGLIST)
+    do
+        $V_DIR/v install $p
+    done
+else 
+    echo "$PKGLIST not found - do not install any VPM packages"
+fi
+
+
 cd $BUILD_DIR
-$V_DIR/v run app.v
+$V_DIR/v app.v
 
 echo "using ${v_repo} @${v_branch}" | indent
 
