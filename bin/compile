@@ -30,7 +30,7 @@ if [ ! -x $V_BIN ]; then
     echo "Installing V..." | arrow
 
     git clone --depth 1 --branch $v_branch $v_repo $V_DIR
-    cd $v_DIR
+    cd $V_DIR
     make
 
     echo "using ${v_repo} @${v_branch}" | indent
