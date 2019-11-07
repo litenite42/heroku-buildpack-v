@@ -29,7 +29,7 @@ vpm.txt
 
 `app.v` will be compiled and run on deploy.
 
-`vpm.txt`is a list of VPM modules that will be installed using `v install ...` before your app is compiled. It can look like this:
+`vpm.txt`is a list of VPM modules that will be installed using `v install ...` before your app is compiled. List one module per line and *terminate with a new line*:
 
 ```
 nedpals.jsonrpc
@@ -37,6 +37,8 @@ nedpals.args
 ``` 
 
 You can omit `vpm.txt`, no packages will be installed then.
+
+Find available VPM modules in the [VPM modules directory](https://vlang.io/modules).
 
 ### Procfile
 
