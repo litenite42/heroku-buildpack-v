@@ -2,6 +2,7 @@
 # usage: bin/compile <build-dir> <cache-dir> <env-dir>
 
 set -eo pipefail
+set -x
 
 function arrow() {
   sed -u 's/^/----->  /'
