@@ -21,19 +21,16 @@ CACHE_DIR=$2
 ENV_DIR=$3
 
 V_DIR=$CACHE_DIR/v
-V_BIN=$V_DIR/bin/v
 
-if [ ! -x $V_BIN ]; then
-    v_repo=$(cat_or $ENV_DIR/V_REPO "https://github.com/vlang/v.git")
-    v_branch=$(cat_or $ENV_DIR/V_BRANCH "master")
+v_repo=$(cat_or $ENV_DIR/V_REPO "https://github.com/vlang/v.git")
+v_branch=$(cat_or $ENV_DIR/V_BRANCH "master")
 
-    echo "Installing V..." | arrow
+echo "Installing V..." | arrow
 
-    git clone --depth 1 --branch $v_branch $v_repo $V_DIR
-    cd $V_DIR
-    make
-    ./v symlink
+git clone --depth 1 --branch $v_branch $v_repo $V_DIR
+cd $V_DIR
+make
+./v symlink
 
-    echo "using ${v_repo} @${v_branch}" | indent
-fi
+echo "using ${v_repo} @${v_branch}" | indent
 
