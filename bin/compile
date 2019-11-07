@@ -37,10 +37,9 @@ make
 PKGLIST=$BUILD_DIR/vpm.txt
 if [ -f "$PKGLIST" ]; then
     echo "Found $PKGLIST, installing VPM packages" | arrow
-    for p in ($PKGLIST)
-    do
-        $V_DIR/v install $p
-    done
+    while read p; do
+      $V_DIR/v install $p
+    done <$PKGLIST
 else 
     echo "$PKGLIST not found - do not install any VPM packages"
 fi
