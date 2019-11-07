@@ -34,7 +34,7 @@ cd $V_DIR
 echo "Building V..." | arrow
 make
 
-$PKGLIST=$BUILD_DIR/vpm.txt
+PKGLIST=$BUILD_DIR/vpm.txt
 if [ -f "$PKGLIST" ]; then
     echo "Found $PKGLIST, installing VPM packages" | arrow
     for p in ($PKGLIST)
