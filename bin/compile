@@ -40,13 +40,22 @@ if [ -f "$PKGLIST" ]; then
       echo "Installing $p" | indent | arrow
       $V_DIR/v install $p
     done < $PKGLIST
-else 
+else
     echo "vpm.txt not found - do not install any VPM packages" | arrow
 fi
 
+REMOTELIST=$BUILD_DIR/remote.txt
+if [ -f "$REMOTELIST" ]; then
+    echo "Found remote.txt, cloning remote git repo to ~/.vmodules" | arrow
+    while read -ra arr; do
+      echo "Cloning ${arr[0]} into ${arr[1]}" | indent | arrow
+      git clone ${arr[0]} ~/.vmodules/${arr[1]}
+    done < $REMOTELIST
+else
+    echo "remote.txt not found - do not install any thirdparty module from a remote repo." | arrow
+fi
 
 cd $BUILD_DIR
 $V_DIR/v -prod app.v
 
 echo "using ${v_repo} @${v_branch}" | indent
-
